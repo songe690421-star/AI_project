@@ -6,7 +6,10 @@ import plotly.express as px
 st.set_page_config(page_title="철도 데이터 분석 대시보드", layout="wide")
 
 # 데이터 읽기
-df = pd.read_csv("analysis_result.csv")
+# 모터와 전력 설비 분석 결과를 함께 읽기
+motor = pd.read_csv("analysis_result.csv")
+power = pd.read_csv("power_analysis_result.csv")
+df = pd.concat([motor, power], ignore_index=True)
 df["측정시각"] = pd.to_datetime(df["측정시각"], errors="coerce")
 
 # ★ 추가: 날짜가 없는 자료 안내와 시간순 정렬
